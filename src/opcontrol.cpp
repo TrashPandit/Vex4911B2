@@ -1,7 +1,5 @@
 #include "main.h"
-#include "okapi/impl/device/rotarysensor/integratedEncoder.hpp"
-#include "util/Side.hpp"
-#include "ui/uihelper.hpp"
+#include "ui/autonUI.hpp"
 // #include "UI/tracker.hpp"
 // #include "util/latchedboolean.hpp"
 
@@ -25,18 +23,13 @@ void opcontrol() {
 	pros::Motor right1 = pros::Motor(3);
 	pros::Motor left2 = pros::Motor(2);
 	pros::Motor right2 = pros::Motor(4);
-	pros::Motor intake1 = pros::Motor(5);
+	pros::Motor intake1 = pros::Motor(8);
 	pros::Motor intake2 = pros::Motor(6);
 	pros::Motor tilter = pros::Motor(7);
-
-
-	okapi::IntegratedEncoder left_encoder = okapi::IntegratedEncoder(left1);
-	okapi::IntegratedEncoder right_encoder = okapi::IntegratedEncoder(right1);
 	// tracker::initialize();
 	// tracker::update(left_encoder.get(), right_encoder.get());
 	// LatchedBoolean outtakeToggle = LatchedBoolean();
 	// LatchedBoolean intakeToggle = LatchedBoolean();
-	UIHelper::initialize();
 	while (true) {
 		int l = master.get_analog(ANALOG_LEFT_Y);
 		int r = -master.get_analog(ANALOG_RIGHT_Y);
@@ -48,21 +41,19 @@ void opcontrol() {
 		bool mLeftTrigger = master.get_digital(DIGITAL_L2);
 		bool mUp_arrow = master.get_digital(DIGITAL_UP);
 		bool mX = master.get_digital(DIGITAL_X);
+		bool mA = master.get_digital(DIGITAL_A);
+		bool pY = partner.get_digital(DIGITAL_Y);
+		bool pA = partner.get_digital(DIGITAL_A);
 		bool pRightBumper = partner.get_digital(DIGITAL_R1);
 		bool pLeftBumper = partner.get_digital(DIGITAL_L1);
 		bool pRightTrigger = partner.get_digital(DIGITAL_R2);
 		bool pLeftTrigger = partner.get_digital(DIGITAL_L2);
-		bool pUp_arrow = partner.get_digital(DIGITAL_UP);
-		bool pX = partner.get_digital(DIGITAL_X);
 
-
-		UIHelper::updateDisplay(left_encoder.get(), right_encoder.get());
-
-		if((mRightBumper || mLeftBumper)){
+		if((mRightBumper || mLeftBumper || pA)){
 			intake1.move(127);
 			intake2.move(-127);
 		}
-		else if(mRightTrigger || mLeftTrigger){
+		else if(mRightTrigger || mLeftTrigger || pY){
 			intake1.move(-127);
 			intake2.move(127);
 		}
@@ -70,11 +61,12 @@ void opcontrol() {
 			intake1.move(0);
 			intake2.move(0);
 		}
-		if(pRightBumper || pLeftBumper){
-			tilter.move(127);
+
+		if(pRightBumper || pLeftBumper || mX){
+			tilter.move(40);
 		}
-		else if(pRightTrigger || pLeftTrigger){
-			tilter.move(-127);
+		else if(pRightTrigger || pLeftTrigger || mA){
+			tilter.move(-40);
 		}
 		else{
 			tilter.move(0);
