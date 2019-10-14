@@ -8,7 +8,7 @@ public:
 
 private:
   static int auton;
-  static lv_btn_state_t auton1_btn_state;
+  // static lv_btn_state_t auton1_btn_state;
   static lv_obj_t * auton1_lbl;
   static lv_obj_t * auton2_lbl;
   static lv_obj_t * auton3_lbl;

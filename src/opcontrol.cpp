@@ -63,10 +63,10 @@ void opcontrol() {
 		}
 
 		if(pRightBumper || pLeftBumper || mX){
-			tilter.move(40);
+			tilter.move(90);
 		}
 		else if(pRightTrigger || pLeftTrigger || mA){
-			tilter.move(-40);
+			tilter.move(-90);
 		}
 		else{
 			tilter.move(0);
