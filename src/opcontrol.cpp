@@ -49,11 +49,11 @@ void opcontrol() {
 		bool pRightTrigger = partner.get_digital(DIGITAL_R2);
 		bool pLeftTrigger = partner.get_digital(DIGITAL_L2);
 
-		if((mRightBumper || mLeftBumper || pA)){
+		if((mRightBumper || pA)){
 			intake1.move(127);
 			intake2.move(-127);
 		}
-		else if(mRightTrigger || mLeftTrigger || pY){
+		else if(mRightTrigger || pY){
 			intake1.move(-127);
 			intake2.move(127);
 		}
@@ -61,12 +61,13 @@ void opcontrol() {
 			intake1.move(0);
 			intake2.move(0);
 		}
-
-		if(pRightBumper || pLeftBumper || mX){
-			tilter.move(90);
+//up
+		if(pRightBumper || pLeftBumper || mLeftBumper){
+			tilter.move_absolute(-1200, 127);
 		}
-		else if(pRightTrigger || pLeftTrigger || mA){
-			tilter.move(-90);
+//down
+		else if(pRightTrigger || pLeftTrigger || mLeftTrigger){
+			tilter.move_absolute(0, 127);
 		}
 		else{
 			tilter.move(0);
