@@ -23,8 +23,11 @@ void opcontrol() {
 	pros::Motor right1 = pros::Motor(3);
 	pros::Motor left2 = pros::Motor(2);
 	pros::Motor right2 = pros::Motor(4);
+	// pros::Motor left3 = pros::Motor(6);
+	// pros::Motor right3 = pros::Motor(7);
 	pros::Motor intake1 = pros::Motor(8);
-	pros::Motor intake2 = pros::Motor(6);
+	pros::Motor intake2 = pros::Motor(9);
+	// pros::Motor tilter = pros::Motor(7);
 	pros::Motor tilter = pros::Motor(7);
 	// tracker::initialize();
 	// tracker::update(left_encoder.get(), right_encoder.get());
@@ -32,8 +35,8 @@ void opcontrol() {
 	// LatchedBoolean intakeToggle = LatchedBoolean();
 	while (true) {
 		int l = master.get_analog(ANALOG_LEFT_Y);
-		int r = -master.get_analog(ANALOG_RIGHT_Y);
-		int pl = partner.get_analog(ANALOG_LEFT_Y);
+		int r = master.get_analog(ANALOG_RIGHT_Y);
+		int pl = -partner.get_analog(ANALOG_LEFT_Y);
 		int pr = -partner.get_analog(ANALOG_RIGHT_Y);
 		bool mRightBumper = master.get_digital(DIGITAL_R1);
 		bool mLeftBumper = master.get_digital(DIGITAL_L1);
@@ -50,12 +53,12 @@ void opcontrol() {
 		bool pLeftTrigger = partner.get_digital(DIGITAL_L2);
 
 		if((mRightBumper || pA)){
-			intake1.move(127);
-			intake2.move(-127);
-		}
-		else if(mRightTrigger || pY){
 			intake1.move(-127);
 			intake2.move(127);
+		}
+		else if(mRightTrigger || pY){
+			intake1.move(127);
+			intake2.move(-127);
 		}
 		else{
 			intake1.move(0);
@@ -63,11 +66,11 @@ void opcontrol() {
 		}
 //up
 		if(pRightBumper || pLeftBumper || mLeftBumper){
-			tilter.move_absolute(-1200, 127);
+			tilter.move_absolute(-3000, 50);
 		}
 //down
 		else if(pRightTrigger || pLeftTrigger || mLeftTrigger){
-			tilter.move_absolute(0, 127);
+			tilter.move_absolute(0, 50);
 		}
 		else{
 			tilter.move(0);
@@ -79,10 +82,10 @@ void opcontrol() {
 			right2.move(pr/5.08 );
 		}
 		if(pl == 0 && pr == 0){
-			left1.move(l);
-			left2.move(l);
-			right1.move(r);
-			right2.move(r);
+			left1.move(r);
+			left2.move(r);
+			right1.move(l);
+			right2.move(l);
 		}
 		pros::delay(20);
 	}

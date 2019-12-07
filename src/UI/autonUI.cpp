@@ -21,12 +21,12 @@ void autonUI::initialize(){
   lv_obj_set_pos(auton3_btn, 100, 150);
   lv_obj_set_pos(auton4_btn, 250, 150);
   //file magic
-  // if(lv_btn_get_state(auton1_btn) == LV_BTN_STATE_PR){
-  //   lv_btn_set_state(auton1_btn, LV_BTN_STATE_REL);
-  //   FILE* usd_file_write = fopen("Autonomous.txt", "w");
-  //   fputs("1", usd_file_write);
-  //   fclose(usd_file_write);
-  // }
+  if(lv_btn_get_state(auton1_btn) == LV_BTN_STATE_PR){
+    lv_btn_set_state(auton1_btn, LV_BTN_STATE_REL);
+    FILE* usd_file_write = fopen("Autonomous.txt", "w");
+    fputs("1", usd_file_write);
+    fclose(usd_file_write);
+  }
 }
 
 int autonUI::getAuton(){
