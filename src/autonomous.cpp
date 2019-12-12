@@ -34,19 +34,19 @@ void autonomous() {
   // right.moveRelative(-2, 80);
   // profileController.setTarget("B");
   // profileController.waitUntilSettled();
-  // chassis.moveDistance(1_ft);
-  // chassis.moveDistance(-1_ft);
+  chassis.moveDistance(1_ft);
+  chassis.moveDistance(-1_ft);
   bool red = false;
   bool blue = true;
-  if(blue == true && red == false){
-    intake1.move(127);
-    intake2.move(-127);
-    pros::delay(1000);
-    intake1.move(-127);
-    intake2.move(127);
-    chassis.moveDistance(18_in);
-    left.moveRelative(10, 80);
-    right.moveRelative(-10, 80);
+  // if(blue == true && red == false){
+    // intake1.move(127);
+    // intake2.move(-127);
+    // pros::delay(1000);
+    // intake1.move(-127);
+    // intake2.move(127);
+    // chassis.moveDistance(18_in);
+    // left.moveRelative(10, 80);
+    // right.moveRelative(-10, 80);
     // intake1.move(127);
     // intake2.move(-127);
     // pros::delay(1000);
@@ -162,4 +162,3 @@ void autonomous() {
   //   intake2.move(0);
   // }
   }
-}

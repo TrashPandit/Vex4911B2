@@ -66,11 +66,11 @@ void opcontrol() {
 		}
 //up
 		if(pRightBumper || pLeftBumper || mLeftBumper){
-			tilter.move_absolute(-3000, 50);
+			tilter.move_absolute(-4000, 80);
 		}
 //down
 		else if(pRightTrigger || pLeftTrigger || mLeftTrigger){
-			tilter.move_absolute(0, 50);
+			tilter.move_absolute(0, 80);
 		}
 		else{
 			tilter.move(0);
