@@ -66,7 +66,7 @@ void opcontrol() {
 		}
 //up
 		if(pRightBumper || pLeftBumper || mLeftBumper){
-			tilter.move_absolute(-4000, 80);
+			tilter.move_absolute(8000, 127);//80
 		}
 //down
 		else if(pRightTrigger || pLeftTrigger || mLeftTrigger){
@@ -82,10 +82,10 @@ void opcontrol() {
 			right2.move(pr/5.08 );
 		}
 		if(pl == 0 && pr == 0){
-			left1.move(r);
-			left2.move(r);
-			right1.move(l);
-			right2.move(l);
+			left1.move(-l);
+			left2.move(-l);
+			right1.move(-r);
+			right2.move(-r);
 		}
 		pros::delay(20);
 	}
