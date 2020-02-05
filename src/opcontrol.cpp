@@ -25,8 +25,8 @@ void opcontrol() {
 	pros::Motor right2 = pros::Motor(4);
 	// pros::Motor left3 = pros::Motor(6);
 	// pros::Motor right3 = pros::Motor(7);
-	pros::Motor intake1 = pros::Motor(8);
-	pros::Motor intake2 = pros::Motor(9);
+	pros::Motor intake1 = pros::Motor(10);
+	pros::Motor intake2 = pros::Motor(6);
 	// pros::Motor tilter = pros::Motor(7);
 	pros::Motor tilter = pros::Motor(7);
 	// tracker::initialize();
@@ -53,11 +53,11 @@ void opcontrol() {
 		bool pLeftTrigger = partner.get_digital(DIGITAL_L2);
 
 		if((mRightBumper || pA)){
-			intake1.move(-127);
+			intake1.move(127);
 			intake2.move(127);
 		}
 		else if(mRightTrigger || pY){
-			intake1.move(127);
+			intake1.move(-127);
 			intake2.move(-127);
 		}
 		else{
@@ -66,7 +66,7 @@ void opcontrol() {
 		}
 //up
 		if(pRightBumper || pLeftBumper || mLeftBumper){
-			tilter.move_absolute(8000, 127);//80
+			tilter.move_absolute(3000, 80);//80
 		}
 //down
 		else if(pRightTrigger || pLeftTrigger || mLeftTrigger){
